@@ -27,7 +27,7 @@ Navigating the filesystem and managing files are the building blocks of using th
 | Command | Description | Example Usage | 
 | ----- | ----- | ----- | 
 | `pwd` | **P**rint **W**orking **D**irectory. Shows your current folder path. | `pwd` | 
-| `ls` | **L**i**s**ts files and directories. Use `-la` to see hidden files and details. | `ls -la` | 
+| `ls` | **L**i**s**ts files and directories. Use `-a` to see hidden files and `-l` for details. | `ls -la` | 
 | `cd` | **C**hange **D**irectory. Move between folders. | `cd /var/log` or `cd ..` (go back) | 
 | `touch` | Creates an empty file or updates the timestamp of an existing file. | `touch notes.txt` | 
 | `cp` | **C**o**p**ies files or directories (use `-r` for recursive directory copying). | `cp source.txt backup.txt` or `cp -r dir1/ dir2/` | 
@@ -60,11 +60,11 @@ Essential tools for slicing, sorting, counting, encoding, and comparing text str
 | `grep` | Searches for a specific pattern or regular expression inside files or input streams. | `grep -i "error" logfile.txt` | 
 | `cut` | Removes/extracts sections from each line of input using a delimiter (`-d`) and field number (`-f`) or character position (`-c`). | `cut -d ':' -f 1 /etc/passwd` | 
 | `sort` | Sorts lines of text files alphabetically or numerically (`-n`), or in reverse (`-r`). | `sort -n numbers.txt` | 
-| `uniq` | Reports or filters out repeated *adjacent* lines in a file (almost always paired after `sort`). Use `-u` for unique only, `-c` to count occurrences. | `sort data.txt | uniq -c` | 
+| `uniq` | Reports or filters out repeated *adjacent* lines in a file (almost always paired after `sort`). Use `-u` for unique only, `-c` to count occurrences. | `sort data.txt \| uniq -c` | 
 | `wc` | **W**ord **C**ount. Prints newline (`-l`), word (`-w`), and byte (`-c`) counts for files or input streams. | `wc -l /etc/passwd` | 
-| `tr` | **Tr**anslates or deletes characters from standard input (useful for case conversion or ROT13 ciphers). | `echo "hello" | tr 'a-z' 'A-Z'` | 
-| `rev` | **Rev**erses lines characterwise. | `echo "ressed" | rev` (Outputs: `dessert`) | 
-| `base64` | Encodes or decodes data into Base64 format. Use `-d` to decode. | `echo "SGVsbG8=" | base64 -d` | 
+| `tr` | **Tr**anslates or deletes characters from standard input (useful for case conversion or ROT13 ciphers). | `echo "hello" \| tr 'a-z' 'A-Z'` | 
+| `rev` | **Rev**erses lines characterwise. | `echo "reh" \| rev` (Outputs: `her`) | 
+| `base64` | Encodes or decodes data into Base64 format. Use `-d` to decode. | `echo "SGVsbG8=" \| base64 -d` (Outputs: `hello`)| 
 | `strings` | Extracts and prints readable text strings from binary or non-text files. | `strings program.bin` | 
 | `cmp` | **C**o**mp**ares two files byte by byte and reports the first difference. | `cmp file1.bin file2.bin` | 
 | `diff` | Compares files line by line and shows what needs to change to make them identical. | `diff -u old_code.py new_code.py` | 
@@ -117,11 +117,11 @@ Test connectivity, inspect network paths, and connect to remote servers or servi
 
 | Command | Description | Example Usage | 
 | ----- | ----- | ----- | 
-| `ping` | Sends ICMP ECHO_REQUEST packets to network hosts to test reachability and latency. | `ping -c 4 google.com` | 
+| `ping` | Sends packets to network hosts to test reachability and latency. | `ping -c 4 google.com` | 
 | `traceroute` | Prints the route (hops) that packets take to reach a network host. | `traceroute github.com` | 
 | `curl` | **C**lient **URL**. Transfers data to or from a server using HTTP/HTTPS, FTP, and more. Great for testing APIs, inspecting headers (`-I`), or downloading files (`-O`). | `curl -I https://example.com` or `curl -s http://ipinfo.io/ip` | 
-| `ssh` | **S**ecure **Sh**ell. Securely connects to a remote machine over an encrypted network connection. | `ssh user@192.168.1.50 -p 22` | 
-| `nc` | **N**et**c**at. The "Swiss-army knife" of networking. Reads and writes data across network connections using TCP or UDP. | `nc -nv 10.0.0.1 8080` or `nc -lvnp 4444` | 
+| `ssh` | **S**ecure **Sh**ell. Securely connects to a remote machine over an encrypted network connection. | `ssh username@host.com -p 22` | 
+| `nc` | **N**et**c**at. Reads and writes data across network connections using TCP or UDP. | `nc -nv 10.0.0.1 8080` or `nc -lvnp 4444` | 
 
 
 ## 8. Git Version Control
@@ -133,14 +133,14 @@ Git is the industry-standard distributed version control system for tracking cha
 * **`git config`**: Sets configuration values for your username, email, and preferences.
 
   ```
-  git config --global user.name "Your Name"
+  git config --global user.name "username"
   git config --global user.email "you@example.com"
   ```
 
 * **`git clone`**: Downloads an existing remote repository to your local machine.
 
   ```
-  git clone https://github.com/username/repository.git
+  git clone https://github.com/notdarking/linux-commands.git
   ```
 
 ### Staging & Saving Changes
@@ -155,7 +155,7 @@ Git is the industry-standard distributed version control system for tracking cha
 * **`git commit`**: Captures a snapshot of the currently staged changes and saves it to the project history.
 
   ```
-  git commit -m "Add user authentication feature"
+  git commit -m "Commit Message"
   ```
 
 * **`git push`**: Uploads your local repository commits to a remote repository (like GitHub).
